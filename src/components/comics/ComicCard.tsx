@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { FC } from 'react';
 import Tag from '../Tag';
 import { ComicReponse } from '@/types/comic';
+import { Badge } from '../ui/badge';
 
 interface ComicCardProps {
     data: ComicReponse;
@@ -13,7 +14,6 @@ interface ComicCardProps {
 
 const ComicCard: FC<ComicCardProps> = ({ data, cnd }) => {
     const router = useRouter();
-    console.log(`${cnd}/uploads/commics/${data.thumb_url}`);
     return (
         <div className="col-span-1 cursor-pointer grou" onClick={() => router.push(`/comics/${data.slug}`)}>
             <div className="flex flex-col gap-2 w-full">
@@ -26,12 +26,12 @@ const ComicCard: FC<ComicCardProps> = ({ data, cnd }) => {
                     />
                     <div className="absolute top-3 right-3 flex flex-col gap-1">
                         {data?.status === 'ongoing' ? (
-                            <Tag title="On Going" className="bg-orange-600" />
+                            <Badge>On Going</Badge>
                         ) : (
                             <>
-                                <Tag title="Full" className="bg-red-600" />
-                                <Tag title="Hot" className="bg-green-600" />
-                                <Tag title="New" className="bg-blue-600" />
+                                <Badge>Full</Badge>
+                                <Badge variant="destructive">Hot</Badge>
+                                <Badge variant="secondary">New</Badge>
                             </>
                         )}
                     </div>

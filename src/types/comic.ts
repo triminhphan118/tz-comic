@@ -7,6 +7,15 @@ export interface GetComicResponse {
     APP_DOMAIN_CDN_IMAGE: string;
 }
 
+export interface GetComicDetailsResponse {
+    item: ComicReponse;
+    seoOnPage: SeoOnPage;
+    params: Params;
+    type_list: string;
+    APP_DOMAIN_FRONTEND: string;
+    APP_DOMAIN_CDN_IMAGE: string;
+}
+
 export interface ComicReponse {
     _id: string;
     name: string;
@@ -17,7 +26,12 @@ export interface ComicReponse {
     sub_docquyen: boolean;
     category: Category[];
     updatedAt: string;
-    chaptersLatest: ChaptersLatest[];
+    chapters: {
+        server_name: string;
+        server_data: Chapters[];
+    }[];
+    author: string[];
+    content: string;
 }
 
 export interface Category {
@@ -26,7 +40,7 @@ export interface Category {
     slug: string;
 }
 
-export interface ChaptersLatest {
+export interface Chapters {
     filename: string;
     chapter_name: string;
     chapter_title: string;
@@ -58,4 +72,28 @@ export interface Pagination {
 export interface GetComicsProps {
     search?: string;
     page: number;
+}
+
+export interface GetComicsByKeyWordProps {
+    keyword?: string;
+}
+
+export interface ChapterDetails {
+    domain_cdn: string;
+    item: ItemChapter;
+}
+
+export interface ItemChapter {
+    chapters: any;
+    _id: string;
+    comic_name: string;
+    chapter_name: string;
+    chapter_title: string;
+    chapter_path: string;
+    chapter_image: ChapterImage[];
+}
+
+export interface ChapterImage {
+    image_page: number;
+    image_file: string;
 }

@@ -8,6 +8,8 @@ import ComicCard from '@/components/comics/ComicCard';
 import Categories from '@/components/navbar/Categories';
 import { useCategoryComicQuery } from '@/services/queries/category.query';
 import { useComicsHomeQuery } from '@/services/queries/comic.query';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { RocketIcon } from '@radix-ui/react-icons';
 
 export default function Home() {
     const { data, isLoading } = useComicsHomeQuery({ page: 0, search: '' });
@@ -24,10 +26,14 @@ export default function Home() {
     return (
         <ClientOnly>
             <Container>
-                <Text
-                    classNames="mt-4"
-                    text="Đọc truyện online, đọc truyện chữ, truyện full, truyện hay. Tổng hợp đầy đủ và cập nhật liên tục."
-                />
+                <Alert className="mt-4">
+                    <RocketIcon className="h-4 w-4" />
+                    <AlertTitle>Heads up!</AlertTitle>
+                    <AlertDescription>
+                        Đọc truyện online, đọc truyện chữ, truyện full, truyện hay. Tổng hợp đầy đủ và cập nhật liên
+                        tục.
+                    </AlertDescription>
+                </Alert>
             </Container>
             <Categories categories={categories} />
             <Container>

@@ -5,9 +5,13 @@
  * @template T The type of the value to parse from localStorage. Defaults to `unknown`.
  */
 const getItem = <T = unknown>(key: string): T | null => {
-    const value = window.localStorage.getItem(key);
-    if (!value) return null;
-    return JSON.parse(value);
+    try {
+        const value = window.localStorage.getItem(key);
+        if (!value) return null;
+        return JSON.parse(value);
+    } catch (error) {
+        return null;
+    }
 };
 
 /**
