@@ -31,7 +31,7 @@ const Search = () => {
                     </div>
                     {data && isShow && (
                         <div className="absolute  bg-white border w-full top-[110%] rounded-sm p-4 ">
-                            <ScrollArea className="w-full r pt-4 h-[350px] overflow-auto">
+                            <ScrollArea className="w-full r pt-4 max-h-[350px] overflow-auto">
                                 <div
                                     className="
                                  grid
@@ -49,6 +49,7 @@ const Search = () => {
                                             />
                                         );
                                     })}
+                                    {!data?.items?.length && <div>Không tìm thấy kết quả</div>}
                                 </div>
                             </ScrollArea>
                         </div>

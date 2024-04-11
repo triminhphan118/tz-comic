@@ -9,8 +9,9 @@ import {
 } from '@/types/comic';
 
 export const getComics = async (params: GetComicsProps): Promise<GetComicResponse> => {
-    const { search, page } = params;
-    const { data } = await api.get<GetComicResponse>(`/home`);
+    const { page: pageNum, category: categorySlug } = params;
+    const path = categorySlug ? `/the-loai/${categorySlug}` : '/home';
+    const { data } = await api.get<GetComicResponse>(path);
     return data;
 };
 

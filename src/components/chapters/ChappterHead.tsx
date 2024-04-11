@@ -55,7 +55,7 @@ const ChappterHead: FC<ChappterHeadProps> = ({ chaptersData, chap, listChapter, 
                     <div className="flex justify-center mt-4">
                         <Button variant={'default'}>
                             <IoIosWarning className="h-4 w-4" />
-                            Server 4
+                            Bị Lỗi
                         </Button>
                     </div>
                 </div>

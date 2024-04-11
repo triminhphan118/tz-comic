@@ -70,8 +70,8 @@ export interface Pagination {
 }
 
 export interface GetComicsProps {
-    search?: string;
-    page: number;
+    page?: number;
+    category?: string;
 }
 
 export interface GetComicsByKeyWordProps {

@@ -8,9 +8,19 @@ interface IParams {
     params: { slug: string };
 }
 
+export async function generateMetadata({ params }: IParams) {
+    const { slug } = params;
+    const details = await getComicDetails(slug);
+    return {
+        title: details.seoOnPage.titleHead,
+        description: details.seoOnPage.descriptionHead,
+    };
+}
+
 const ComicPage: FC<IParams> = async ({ params }) => {
     const { slug } = params;
     const details = await getComicDetails(slug);
+    console.log(details);
     // const queryClient = new QueryClient();
     // await queryClient.prefetchQuery({
     //     queryKey: ['getComicDetails', slug],

@@ -8,6 +8,15 @@ interface IParams {
     params: { chapterId: string; slug: string };
 }
 
+export async function generateMetadata({ params }: IParams) {
+    const { slug } = params;
+    const details = await getComicDetails(slug);
+    return {
+        title: details.seoOnPage.titleHead,
+        description: details.seoOnPage.descriptionHead,
+    };
+}
+
 const ChapterPage: FC<IParams> = async ({ params }) => {
     const { chapterId, slug } = params;
     const chaptersData = await getChapterComic(chapterId);
