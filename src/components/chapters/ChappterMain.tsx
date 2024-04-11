@@ -37,7 +37,7 @@ interface ChappterMainProps {
 const ChappterMain: FC<ChappterMainProps> = ({ chaptersData }) => {
     return (
         <div className="w-full flex-col">
-            {chaptersData?.item?.chapter_image?.map((item, index) => (
+            {/* {chaptersData?.item?.chapter_image?.map((item, index) => (
                 <div key={item.image_page} className="relative mx-auto">
                     <Image
                         alt={`${item.image_page}`}
@@ -48,7 +48,23 @@ const ChappterMain: FC<ChappterMainProps> = ({ chaptersData }) => {
                         className="object-cover size-full relative"
                     />
                 </div>
-            ))}
+            ))} */}
+            {Array(10)
+                .fill(0)
+                .map((item, index) => {
+                    return (
+                        <div key={item.image_page} className="relative mx-auto">
+                            <Image
+                                alt={`fdgdfgfdg`}
+                                src={'https://via.placeholder.com/300x300'}
+                                layout="responsive"
+                                width={300}
+                                height={300}
+                                className="object-cover size-full relative"
+                            />
+                        </div>
+                    );
+                })}
         </div>
     );
 };

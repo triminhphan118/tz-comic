@@ -6,16 +6,19 @@ import { GetComicDetailsResponse } from '@/types/comic';
 interface GlobalState {
     isMenuOpen: boolean;
     comicDetails: GetComicDetailsResponse | null;
+    isStickyActionBar: boolean;
 }
 
 export interface GlobalStore extends GlobalState {
     toggleMenu: () => void;
     setComicDetails: (payload: GetComicDetailsResponse) => void;
+    setToggleStickyActionBar: (payload: boolean) => void;
 }
 
 const initialState: Pick<GlobalStore, keyof GlobalState> = {
     isMenuOpen: getItem('isMenuOpen') ?? false,
     comicDetails: null,
+    isStickyActionBar: false,
 };
 
 const useGlobalStore = create<GlobalStore>()(
@@ -31,6 +34,11 @@ const useGlobalStore = create<GlobalStore>()(
             setComicDetails: (payload) => {
                 set(() => {
                     return { comicDetails: payload };
+                });
+            },
+            setToggleStickyActionBar: (payload) => {
+                set(() => {
+                    return { isStickyActionBar: payload };
                 });
             },
         }),
