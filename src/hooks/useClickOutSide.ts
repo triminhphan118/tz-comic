@@ -28,7 +28,7 @@ export function useClickOutside<T extends HTMLElement = any>(
         return () => {
             (events || DEFAULT_EVENTS).forEach((fn) => document.removeEventListener(fn, listener));
         };
-    }, [ref, handler, nodes]);
+    }, [ref, handler, nodes, events]);
 
     return ref;
 }

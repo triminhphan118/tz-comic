@@ -21,7 +21,7 @@ export function useDebouncedState<T = any>(defaultValue: T, wait: number, option
             }
             leadingRef.current = false;
         },
-        [options.leading],
+        [options.leading, wait],
     );
 
     return [value, debouncedSetValue] as const;

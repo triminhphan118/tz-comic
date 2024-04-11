@@ -17,7 +17,7 @@ export default function Home() {
     const params = useSearchParams();
     const currentQuery = queryString.parse(params.toString());
     const { data, isLoading } = useComicsHomeQuery({
-        ...(currentQuery?.category && { category: currentQuery.category }),
+        category: currentQuery?.category as string,
         page: 0,
     });
     const { data: categories } = useCategoryComicQuery();

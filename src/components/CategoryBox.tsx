@@ -19,7 +19,7 @@ interface CategoryBoxProps {
 
 const SIZE = 26;
 
-const icons = {
+const icons: { [key: string]: any } = {
     action: <MdAddReaction size={SIZE} />,
     adult: <MdNoAdultContent size={SIZE} />,
     anime: <SiMyanimelist size={SIZE} />,
