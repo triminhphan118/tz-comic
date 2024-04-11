@@ -1,5 +1,3 @@
-'use client';
-
 import ClientOnly from '@/components/ClientOnly';
 import Container from '@/components/Container';
 import EmptyState from '@/components/EmptyState';
@@ -12,23 +10,21 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { RocketIcon } from '@radix-ui/react-icons';
 import { useSearchParams } from 'next/navigation';
 import queryString from 'query-string';
+import { getComics } from '@/services/api/comic.service';
+import { getCategories } from '@/services/api/category.service';
 
-export default function Home() {
-    const params = useSearchParams();
+interface IParams {
+    params: { chapterId: string; slug: string };
+}
+
+const Home = async ({ params }: IParams) => {
+    // const params = useSearchParams();
     const currentQuery = queryString.parse(params.toString());
-    const { data, isLoading } = useComicsHomeQuery({
+    const data = await getComics({
         category: currentQuery?.category as string,
         page: 0,
     });
-    const { data: categories } = useCategoryComicQuery();
-    // const isEmpty = true;
-    // if (isEmpty) {
-    //     return (
-    //         <ClientOnly>
-    //             <EmptyState showReset />
-    //         </ClientOnly>
-    //     );
-    // }
+    const categories = await getCategories();
     return (
         <ClientOnly>
             <Container>
@@ -63,4 +59,6 @@ export default function Home() {
             </Container>
         </ClientOnly>
     );
-}
+};
+
+export default Home;
