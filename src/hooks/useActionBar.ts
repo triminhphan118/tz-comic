@@ -1,6 +1,6 @@
-import { Chapters, GetComicDetailsResponse } from "@/types/comic";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { Chapters, GetComicDetailsResponse } from '@/types/comic';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 const useActionBar = (numberChap: number, listChapter: GetComicDetailsResponse) => {
     const router = useRouter();
@@ -20,6 +20,7 @@ const useActionBar = (numberChap: number, listChapter: GetComicDetailsResponse) 
         }
 
         const foundChap = listChapter.item?.chapters[0]?.server_data[newNumberChap];
+        if (!foundChap) return;
         router.push(
             `/comics/${listChapter.item.slug}/chapter/${
                 foundChap.chapter_api_data.split('/')[foundChap.chapter_api_data.split('/').length - 1]

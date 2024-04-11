@@ -12,7 +12,12 @@ export const useComicsHomeQuery = (params: GetComicsProps) =>
     useQuery<GetComicResponse>({
         queryKey: ['getComicHome', params],
         queryFn: async () => {
-            const res = await getComics(params);
+            const { page, category } = params;
+            const query = category ? { category } : {};
+            const res = await getComics({
+                ...query,
+                page,
+            });
             return res;
         },
     });

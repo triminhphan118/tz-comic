@@ -18,7 +18,7 @@ const Logo = () => {
                 className="hidden md:block cursor-pointer rounded-md"
                 height={30}
                 width={40}
-                src={'/images/turtle.jpg'}
+                src="https://i.ibb.co/p3QWhW6/Cute-Illustration-Animal-Logo.png"
             />
         </a>
     );

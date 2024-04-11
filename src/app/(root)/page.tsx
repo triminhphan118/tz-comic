@@ -10,11 +10,17 @@ import { useCategoryComicQuery } from '@/services/queries/category.query';
 import { useComicsHomeQuery } from '@/services/queries/comic.query';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { RocketIcon } from '@radix-ui/react-icons';
+import { useSearchParams } from 'next/navigation';
+import queryString from 'query-string';
 
 export default function Home() {
-    const { data, isLoading } = useComicsHomeQuery({ page: 0, search: '' });
+    const params = useSearchParams();
+    const currentQuery = queryString.parse(params.toString());
+    const { data, isLoading } = useComicsHomeQuery({
+        ...(currentQuery?.category && { category: currentQuery.category }),
+        page: 0,
+    });
     const { data: categories } = useCategoryComicQuery();
-
     // const isEmpty = true;
     // if (isEmpty) {
     //     return (
@@ -28,7 +34,7 @@ export default function Home() {
             <Container>
                 <Alert className="mt-4">
                     <RocketIcon className="h-4 w-4" />
-                    <AlertTitle>Heads up!</AlertTitle>
+                    <AlertTitle>Hiện tại mình vẫn đang hoàn thành trang nên có lỗi gì mn thông cảm!!!</AlertTitle>
                     <AlertDescription>
                         Đọc truyện online, đọc truyện chữ, truyện full, truyện hay. Tổng hợp đầy đủ và cập nhật liên
                         tục.

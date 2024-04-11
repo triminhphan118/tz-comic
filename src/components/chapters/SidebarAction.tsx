@@ -35,9 +35,9 @@ const SidebarAction: FC<SidebarActionProps> = ({ chaptersData, chap, listChapter
                 <IoReorderThree />
             </Button>
 
-            <Button variant="outline" size="icon">
+            {/* <Button variant="outline" size="icon">
                 <GiBackwardTime />
-            </Button>
+            </Button> */}
 
             <Button
                 variant="outline"
@@ -51,8 +51,8 @@ const SidebarAction: FC<SidebarActionProps> = ({ chaptersData, chap, listChapter
                 <DropdownMenuTrigger asChild>
                     <Button variant="outline">{chap && `Chapter ${chap?.chapter_name}`}</Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-80">
-                    <DropdownMenuItem>
+                <DropdownMenuContent className="w-80 relative z-50 ">
+                    <DropdownMenuItem className="bg-white p-2">
                         <div className="grid grid-cols-2 gap-2 w-full h-80 overflow-auto">
                             {listChapter.item?.chapters[0]?.server_data?.map((chap, index) => {
                                 return (
