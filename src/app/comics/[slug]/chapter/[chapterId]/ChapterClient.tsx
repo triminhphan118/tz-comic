@@ -26,7 +26,7 @@ const ChapterClient: FC<ChapterClientProps> = ({ chaptersData, details }) => {
         return index;
     });
 
-    useStickyScroll();
+    // useStickyScroll();
 
     useEffect(() => {
         if (numberChap >= 0) {
