@@ -14,15 +14,13 @@ import { getComics } from '@/services/api/comic.service';
 import { getCategories } from '@/services/api/category.service';
 
 interface IParams {
-    params: { chapterId: string; slug: string };
+    params: { chapterId: string; slug: string; category: string };
+    searchParams: { category: string };
 }
 
-const Home = async ({ params }: IParams) => {
-    // const params = useSearchParams();
-    const currentQuery = queryString.parse(params.toString());
+const Home = async ({ params, searchParams }: IParams) => {
     const data = await getComics({
-        category: currentQuery?.category as string,
-        page: 0,
+        category: searchParams?.category as string,
     });
     const categories = await getCategories();
     return (
@@ -30,7 +28,7 @@ const Home = async ({ params }: IParams) => {
             <Container>
                 <Alert className="mt-4">
                     <RocketIcon className="h-4 w-4" />
-                    <AlertTitle>Hiện tại mình vẫn đang hoàn thành trang nên có lỗi gì mn thông cảm!!!</AlertTitle>
+                    <AlertTitle>Heads up!</AlertTitle>
                     <AlertDescription>
                         Đọc truyện online, đọc truyện chữ, truyện full, truyện hay. Tổng hợp đầy đủ và cập nhật liên
                         tục.
