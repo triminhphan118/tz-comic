@@ -4,6 +4,7 @@ import Container from '@/components/Container';
 import ChappterHead from '@/components/chapters/ChappterHead';
 import ChappterMain from '@/components/chapters/ChappterMain';
 import ChapterFooter from '@/components/chapters/ChapterFooter';
+import useStickyScroll from '@/hooks/useStickyScroll';
 import useGlobalStore from '@/store/useGlobalStore';
 import { ChapterDetails, Chapters, GetComicDetailsResponse } from '@/types/comic';
 import { FC, useEffect, useState } from 'react';
@@ -24,6 +25,8 @@ const ChapterClient: FC<ChapterClientProps> = ({ chaptersData, details }) => {
         );
         return index;
     });
+
+    useStickyScroll();
 
     useEffect(() => {
         if (numberChap >= 0) {

@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
+import useGlobalStore from '@/store/useGlobalStore';
+import { useEffect, useState } from 'react';
 
 type Offset = number;
 
@@ -6,29 +7,30 @@ interface StickyScrollProps {
   offset?: Offset;
 }
 
-interface StickyResult {
-  isSticky: boolean;
-  ref: React.RefObject<HTMLDivElement>;
-}
-
-function useStickyScroll({ offset = 0 }: StickyScrollProps = {}): StickyResult {
-  const [isSticky, setIsSticky] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
+function useStickyScroll({ offset = -100 }: StickyScrollProps = {}) {
+  const { isSticky, setSticky } = useGlobalStore((state) => ({
+    isSticky: state.isStickyActionBar,
+    setSticky: state.setToggleStickyActionBar,
+})); 
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (ref.current) {
-        setIsSticky(ref.current.getBoundingClientRect().top <= offset);
+    let lastScrollY = window.scrollY;
+
+    const updateScrollDirection = () => {
+      const scrollY = window.scrollY;
+      const direction = scrollY > lastScrollY ? "down" : "up";
+    const status = direction === 'down' && scrollY > 50  ? true : false
+      if (status !== isSticky && (scrollY - lastScrollY > 10 || scrollY - lastScrollY < -10)) {
+
+        setSticky(status);
       }
+      lastScrollY = scrollY > 0 ? scrollY : 0;
     };
-
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", updateScrollDirection); // add event listener
     return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [offset]);
-
-  return { isSticky, ref };
+      window.removeEventListener("scroll", updateScrollDirection); // clean up
+    }
+  }, [isSticky, setSticky]);
 }
 
 export default useStickyScroll;

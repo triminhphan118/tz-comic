@@ -12,6 +12,7 @@ import useActionBar from '@/hooks/useActionBar';
 import { ChapterDetails, GetComicDetailsResponse, Chapters } from '@/types/comic';
 import { FC } from 'react';
 import { Button } from '../ui/button';
+import useGlobalStore from '@/store/useGlobalStore';
 
 interface SidebarActionProps {
     chaptersData: ChapterDetails;
@@ -25,8 +26,13 @@ const SidebarAction: FC<SidebarActionProps> = ({ chaptersData, chap, listChapter
         numberChap,
         listChapter,
     );
+
+    const { isSticky } = useGlobalStore((state) => ({
+        isSticky: state.isStickyActionBar,
+    }));
+
     return (
-        <div className="flex gap-2 justify-center mt-4">
+        <div className={`flex gap-2 justify-center mt-4 ${isSticky ? 'mt-0 bg-black py-2' : ''}`}>
             <Button variant="outline" size="icon" onClick={handleOnclickHomeButton}>
                 <IoHome />
             </Button>
