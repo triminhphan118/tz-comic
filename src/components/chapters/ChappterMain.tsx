@@ -1,6 +1,6 @@
 'use client';
 
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { ChapterDetails } from '@/types/comic';
 import Image from 'next/image';
 
@@ -20,12 +20,10 @@ const ChappterMain: FC<ChappterMainProps> = ({ chaptersData }) => {
                         width={300}
                         height={300}
                         className="object-cover size-full relative"
-                        priority={true}
                     />
                 </div>
             ))}
         </div>
     );
 };
-
 export default ChappterMain;
