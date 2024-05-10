@@ -12,8 +12,11 @@ interface ComicCardProps {
 
 const ComicCardHorizontal: FC<ComicCardProps> = ({ data, cnd }) => {
     const router = useRouter();
+    const handleOnClick = () => {
+        router.push(`/comics/${data.slug}`);
+    };
     return (
-        <div className="col-span-1 cursor-pointer grouup" onClick={() => router.push(`/comics/${'data.slug'}`)}>
+        <div className="col-span-1 cursor-pointer grouup" onClick={handleOnClick}>
             <div className="flex gap-2 w-full">
                 <div className="relative overflow-hidden rounded-md border border-gray-100 flex-shrink-0">
                     <Image

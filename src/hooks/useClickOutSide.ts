@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react';
 const DEFAULT_EVENTS = ['mousedown', 'touchstart'];
 
 export function useClickOutside<T extends HTMLElement = any>(
-    handler: () => void,
+    handler: (target: HTMLElement) => void,
     events?: string[] | null,
     nodes?: (HTMLElement | null)[],
 ) {
@@ -17,9 +17,9 @@ export function useClickOutside<T extends HTMLElement = any>(
                     target?.hasAttribute('data-ignore-outside-clicks') ||
                     (!document.body.contains(target) && target.tagName !== 'HTML');
                 const shouldTrigger = nodes.every((node) => !!node && !event.composedPath().includes(node));
-                shouldTrigger && !shouldIgnore && handler();
+                shouldTrigger && !shouldIgnore && handler(target);
             } else if (ref.current && !ref.current.contains(target)) {
-                handler();
+                handler(target);
             }
         };
 

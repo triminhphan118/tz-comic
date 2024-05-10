@@ -12,7 +12,10 @@ const Search = () => {
     const [isShow, setIsShow] = useState(false);
     const [value, setValue] = useDebouncedState('', 200);
     const { data } = useComicsQuery({ keyword: value });
-    const ref = useClickOutside(() => setIsShow(false));
+    const ref = useClickOutside((el: HTMLElement) => {
+        if (el?.closest('.list-search')) return;
+        setIsShow(false);
+    });
 
     return (
         <div className="border-[1px] w-full rounded-full shadow-sm md:w-auto hover:shadow-md transition cursor-pointer">
@@ -30,7 +33,7 @@ const Search = () => {
                         <BiSearch />
                     </div>
                     {data && isShow && (
-                        <div className="absolute  bg-white border w-full top-[110%] rounded-sm p-4 ">
+                        <div className="absolute  bg-white border w-full top-[110%] rounded-sm p-4 list-search">
                             <ScrollArea className="w-full r pt-4 max-h-[350px] overflow-auto">
                                 <div
                                     className="
